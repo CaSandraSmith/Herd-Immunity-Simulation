@@ -71,31 +71,38 @@ if __name__ == "__main__":
     # of survival is random you need to check a group of people. 
     # Create a list to hold 100 people. Use the loop below to make 100 people
     people = []
-    for i in range(1, 100):
+    for i in range(1, 101):
         # TODO Make a person with an infection
         # TODO Append the person to the people list
-        pass
+        new_person = Person(i, False, virus)
+        people.append(new_person)
+        
 
     # Now that you have a list of 100 people. Resolve whether the Person 
     # survives the infection or not by looping over the people list. 
 
-    # for person in people:
-    #     # For each person call that person's did_survive_infection method
-    #     survived = person.did_survive_infection()
-
     # Count the people that survived and did not survive: 
    
-    # did_survived = 0
-    # did_not_survive = 0
+    did_survived = 0
+    did_not_survive = 0
 
     # TODO Loop over all of the people 
     # TODO If a person is_alive True add one to did_survive
     # TODO If a person is_alive False add one to did_not_survive
+    
+    for person in people:
+        # For each person call that person's did_survive_infection method
+        survived = person.did_survive_infection()
+        
+        if (survived): did_survived += 1
+        else: did_not_survive += 1
 
     # TODO When the loop is complete print your results.
     # The results should roughly match the mortality rate of the virus
     # For example if the mortality rate is 0.2 rough 20% of the people 
     # should succumb. 
+    print(f"{did_survived} people survived.")
+    print(f"{did_not_survive} people didn't survive.")
 
     # Stretch challenge! 
     # Check the infection rate of the virus by making a group of 
