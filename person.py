@@ -94,7 +94,7 @@ if __name__ == "__main__":
         # For each person call that person's did_survive_infection method
         survived = person.did_survive_infection()
         
-        if (survived): did_survived += 1
+        if survived: did_survived += 1
         else: did_not_survive += 1
 
     # TODO When the loop is complete print your results.
@@ -105,12 +105,36 @@ if __name__ == "__main__":
     print(f"{did_not_survive} people didn't survive.")
 
     # Stretch challenge! 
+    
     # Check the infection rate of the virus by making a group of 
     # unifected people. Loop over all of your people. 
-    # Generate a random number. If that number is less than the 
-    # infection rate of the virus that person is now infected. 
-    # Assign the virus to that person's infection attribute. 
+    unInfected_people = []
+    for i in range(1, 101):
+        new_person = Person(i, False)
+        
+        # Generate a random number. If that number is less than the 
+        random_number = random.random()
 
+        if random_number < virus.repro_rate:
+            # infection rate of the virus that person is now infected. 
+            # Assign the virus to that person's infection attribute. 
+            new_person.infection = virus
+        
+        unInfected_people.append(new_person)
+        
+    is_infected = 0
+    is_not_infected = 0
+    
     # Now count the infected and uninfect people from this group of people. 
     # The number of infectedf people should be roughly the same as the 
     # infection rate of the virus.
+    for person in unInfected_people:
+        if person.infection == None:
+            is_not_infected += 1
+        else:
+            is_infected += 1
+    
+    print(f"{is_infected} people were infected.")
+    print(f"{is_not_infected} people weren't infected.") 
+    
+        
