@@ -25,11 +25,13 @@ class Person(object):
         if random_number < self.infection.mortality_rate:
             # person's infection they have passed away. 
             self.infection = False
+            self.is_alive = False
             return False
         # Otherwise they have survived infection and they are now vaccinated. 
         else:
             # Set their properties to show this
             self.is_vaccinated = True
+            self.infection = None
             return True
         # TODO: The method Should return a Boolean showing if they survived.
 

@@ -9,25 +9,54 @@ class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
         # TODO: Create a Logger object and bind it to self.logger.
         # Remember to call the appropriate logger method in the corresponding parts of the simulation.
+        # self.logger = Logger
+        
+        
+        
         
         # TODO: Store the virus in an attribute
+        self.virus = virus
+        
         # TODO: Store pop_size in an attribute
+        self.pop_size = pop_size
+        
         # TODO: Store the vacc_percentage in a variable
+        self.vacc_percentage = vacc_percentage
+        
         # TODO: Store initial_infected in a variable
+        self.initial_infected = initial_infected
+        
         # You need to store a list of people (Person instances)
         # Some of these people will be infected some will not. 
         # Use the _create_population() method to create the list and 
         # return it storing it in an attribute here. 
         # TODO: Call self._create_population() and pass in the correct parameters.
-        pass
+        people = self._create_population(pop_size, initial_infected, virus)
+        self.people = people
 
-    def _create_population(self):
+    def _create_population(self, pop_size, initial_infected, virus):
         # TODO: Create a list of people (Person instances). This list 
         # should have a total number of people equal to the pop_size. 
         # Some of these people will be uninfected and some will be infected.
         # The number of infected people should be equal to the the initial_infected
         # TODO: Return the list of people
-        pass
+        people = []
+        
+        # range stops at number before stop so adding 1 to get same number of people as pop size 
+        for i in range(1, pop_size + 1):
+            # check if there are more people who need to be infected
+            is_infected = initial_infected > 0
+            
+            # if yes, five them the virus
+            if is_infected:
+                new_person = Person(i, False, virus)
+            else: new_person = Person(i, False)
+            
+            people.append(new_person)
+            # subtract from number of peopl who need to be infected
+            initial_infected -= 1
+            
+        return people
 
     def _simulation_should_continue(self):
         # This method will return a booleanb indicating if the simulation 
@@ -36,7 +65,28 @@ class Simulation(object):
         # or if all of the living people have been vaccinated. 
         # TODO: Loop over the list of people in the population. Return True
         # if the simulation should continue or False if not.
-        pass
+        
+        looking_for_alive = None
+        
+        # loop through all people
+        for person in self.people:
+            alive = person.is_alive
+            
+            # the first person we encounter will tell us if we're looking
+            # to see if everyone has died or if everyone is alive
+            if looking_for_alive == None:
+                looking_for_alive = alive
+                continue
+            
+            # check if the person has the same status as the looking_for_alive variable
+            if not (alive == looking_for_alive):
+                # break loop early if yes
+                return True
+        
+        # if we were able to finish looping, everyone had the same status
+        # and sim should end
+        return False
+            
 
     def run(self):
         # This method starts the simulation. It should track the number of 
@@ -108,7 +158,6 @@ if __name__ == "__main__":
     initial_infected = 10
 
     # Make a new instance of the imulation
-    virus = Virus(virus, pop_size, vacc_percentage, initial_infected)
-    sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
 
     # sim.run()
