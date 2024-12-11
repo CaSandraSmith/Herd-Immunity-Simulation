@@ -13,7 +13,7 @@ class Person(object):
         self.is_vaccinated = is_vaccinated
         self.infection = infection
 
-    def did_survive_infection(self):
+    def did_survive_infection(self, virus):
         # This method checks if a person survived an infection. 
         # TODO Only called if infection attribute is not None.
         if self.infection == None: return
@@ -22,7 +22,7 @@ class Person(object):
         random_number = random.random()
         
         # If the number is less than the mortality rate of the 
-        if random_number < self.infection.mortality_rate:
+        if random_number < virus.mortality_rate:
             # person's infection they have passed away. 
             self.infection = False
             self.is_alive = False
@@ -31,7 +31,7 @@ class Person(object):
         else:
             # Set their properties to show this
             self.is_vaccinated = True
-            self.infection = None
+            self.infection = False
             return True
         # TODO: The method Should return a Boolean showing if they survived.
 
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     
     for person in people:
         # For each person call that person's did_survive_infection method
-        survived = person.did_survive_infection()
+        survived = person.did_survive_infection(virus)
         
         if survived: did_survived += 1
         else: did_not_survive += 1
