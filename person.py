@@ -69,6 +69,13 @@ if __name__ == "__main__":
     assert infected_person.is_vaccinated is False
     assert isinstance(infected_person.infection, Virus)
     
+    # Test 4
+    vaccinated_person2 = Person(4, True)
+    assert vaccinated_person2._id == 4
+    assert vaccinated_person2.is_alive is True
+    assert vaccinated_person2.is_vaccinated is True
+    assert vaccinated_person2.infection is None
+    
     # You need to check the survival of an infected person. Since the chance
     # of survival is random you need to check a group of people. 
     # Create a list to hold 100 people. Use the loop below to make 100 people
@@ -105,6 +112,7 @@ if __name__ == "__main__":
     # should succumb. 
     print(f"{did_survived} people survived.")
     print(f"{did_not_survive} people didn't survive.")
+
 
     # Stretch challenge! 
     
