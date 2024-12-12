@@ -1,7 +1,61 @@
-Initial size of the population	1000Initial number of infected people	100Name of the virus	SnifflesMortality Rate	12.0%Repro rate	50.0%Vaccination percentage	10.0%Date the simulation was run	2024-12-11
-Step	1New infections	888New deaths	11Interactions	10000Total Living	989Total Dead	11Total Vaccinated	89Total Infected	888
+****** SIMULATION START ******
+Initial size of the population	100000
+Initial number of infected people	10
+Name of the virus	Ebola
+Mortality Rate	70.0%
+Repro rate	25.0%
+Vaccination percentage	90.0%
+Date the simulation was run	2024-12-11
 
-Step	2New infections	12New deaths	96Interactions	88800Total Living	893Total Dead	107Total Vaccinated	881Total Infected	12
+****** Step 1 ******
+New infections	237
+New deaths	6
+Interactions	1000
+Total Living	99994
+Total Dead	6
+Total Vaccinated	4
+Total Infected	237
 
-Step	3New infections	0New deaths	1Interactions	1200Total Living	892Total Dead	108Total Vaccinated	892Total Infected	0
-Total living	892Total dead	108Number of vaccinations	892Why the simulation ended	Virus burned outTotal interactions	100000Number of interactions that resulted in vaccination	0Number of interactions that resulted in death	0
+****** Step 2 ******
+New infections	5788
+New deaths	160
+Interactions	23700
+Total Living	99834
+Total Dead	166
+Total Vaccinated	81
+Total Infected	5788
+
+****** Step 3 ******
+New infections	72454
+New deaths	3991
+Interactions	578800
+Total Living	95843
+Total Dead	4157
+Total Vaccinated	1878
+Total Infected	72454
+
+****** Step 4 ******
+New infections	21511
+New deaths	50709
+Interactions	7245400
+Total Living	45134
+Total Dead	54866
+Total Vaccinated	23623
+Total Infected	21511
+
+****** Step 5 ******
+New infections	0
+New deaths	15041
+Interactions	2151100
+Total Living	30093
+Total Dead	69907
+Total Vaccinated	30093
+Total Infected	0
+
+****** SIMULATION END ******
+Total living	30093
+Total dead	69907
+Total vaccinations	30093
+Why the simulation ended	Every living person was vaccinated
+Total interactions	10000000
+Infections prevented because of vaccination	3094951

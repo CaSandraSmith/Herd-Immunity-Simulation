@@ -32,6 +32,7 @@ class Simulation(object):
         self.population = population
         
         self.total_interactions = 0
+        self.total_vacc_interactions = 0
         
         self.newly_infected = []
 
@@ -134,7 +135,7 @@ class Simulation(object):
             self.total_interactions += interactions
             
             # if time_step_counter == 1: break
-        self.logger.log_simulation_end(self.population, self.total_interactions)
+        self.logger.log_simulation_end(self.population, self.total_interactions, self.total_vacc_interactions)
             
         # TODO: When the simulation completes you should conclude this with 
         # the logger. Send the final data to the logger. 
@@ -192,6 +193,7 @@ class Simulation(object):
             # random_person is vaccinated:
             #     nothing happens to random person.
         if random_person.is_vaccinated == True:
+            self.total_vacc_interactions += 1
             return
         
             # random_person is already infected:
@@ -210,9 +212,7 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their infected
             #     attribute can be changed to True at the end of the time step.
                 self.newly_infected.append(random_person)
-        # TODO: Call logger method during this method.
-
-
+        # TODO: Call logger method during this method. NOTE: I'm not using this provided logger
 
 
     def _infect_newly_infected(self):
@@ -230,17 +230,31 @@ class Simulation(object):
 
 if __name__ == "__main__":
     # Test your simulation here
-    virus_name = "Sniffles"
-    repro_num = 0.5
-    mortality_rate = 0.12
-    virus = Virus(virus_name, repro_num, mortality_rate)
+        
+    # example test
+    # virus_name = "Sniffles"
+    # repro_num = 0.5
+    # mortality_rate = 0.12
+    # virus = Virus(virus_name, repro_num, mortality_rate)
 
-    # Set some values used by the simulation
-    pop_size = 1000
-    vacc_percentage = 0.1
-    initial_infected = 100
+    # # Set some values used by the simulation
+    # pop_size = 1000
+    # vacc_percentage = 0.1
+    # initial_infected = 100
 
-    # Make a new instance of the imulation
+    # # Make a new instance of the imulation
+    # sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
+
+    arguments = sys.argv
+    pop_size = int(arguments[1])
+    vacc_percentage = float(arguments[2])
+    virus_name = arguments[3]
+    mortality_rate = float(arguments[4])
+    repro_rate = float(arguments[5])
+    initial_infected = int(arguments[6])
+    
+    virus = Virus(virus_name, repro_rate, mortality_rate)
     sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
 
     sim.run()
+

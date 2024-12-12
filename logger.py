@@ -22,24 +22,25 @@ class Logger(object):
         # event logged ends up on a separate line!
         
         data = [
-            f"Initial size of the population\t{pop_size}",
-            f"Initial number of infected people\t{initial_infected}",
-            f"Name of the virus\t{virus_name}",
-            f"Mortality Rate\t{mortality_rate * 100}%",
-            f"Repro rate\t{basic_repro_num * 100}%",
-            f"Vaccination percentage\t{vacc_percentage* 100}%",
-            f"Date the simulation was run\t{date.today()}"
+            "****** SIMULATION START ******\n",
+            f"Initial size of the population\t{pop_size}\n",
+            f"Initial number of infected people\t{initial_infected}\n",
+            f"Name of the virus\t{virus_name}\n",
+            f"Mortality Rate\t{mortality_rate * 100}%\n",
+            f"Repro rate\t{basic_repro_num * 100}%\n",
+            f"Vaccination percentage\t{vacc_percentage* 100}%\n",
+            f"Date the simulation was run\t{date.today()}\n"
         ]
         
         outfile = open(self.file_name, "w")
         
         for data_point in data:
             outfile.write(data_point)
-            print(data_point)
+            print(data_point.replace("\n", ""))
 
         outfile.close()
 
-    def log_simulation_end(self, population, total_interactions):
+    def log_simulation_end(self, population, total_interactions, total_vacc_interactions):
         # When the simulation concludes you should log the results of the simulation. 
         # This should include: 
         #   The population size, the number of living, the number of dead, the number 
@@ -60,20 +61,20 @@ class Logger(object):
             if person.is_vaccinated == True:
                 total_vaccinated += 1
                 
-        if total_vaccinated == len(population):
-            reason_sim_end = "Everyone was vaccinated"
+        if total_vaccinated == total_living:
+            reason_sim_end = "Every living person was vaccinated"
         elif total_dead == len(population):
             reason_sim_end = "Everyone died"
         else: reason_sim_end = "Virus burned out"
                 
         data = [
-            f"Total living\t{total_living}",
-            f"Total dead\t{total_dead}",
-            f"Number of vaccinations\t{total_vaccinated}",
-            f"Why the simulation ended\t{reason_sim_end}",
-            f"Total interactions\t{total_interactions}",
-            f"Number of interactions that resulted in vaccination\t{0}",
-            f"Number of interactions that resulted in death\t{0}"
+            "\n****** SIMULATION END ******\n",
+            f"Total living\t{total_living}\n",
+            f"Total dead\t{total_dead}\n",
+            f"Total vaccinations\t{total_vaccinated}\n",
+            f"Why the simulation ended\t{reason_sim_end}\n",
+            f"Total interactions\t{total_interactions}\n",
+            f"Infections prevented because of vaccination\t{total_vacc_interactions}\n",
         ]
         
         outfile = open(self.file_name, "a")
@@ -81,7 +82,7 @@ class Logger(object):
         outfile.write("")
         for data_point in data:
             outfile.write(data_point)
-            print(data_point)
+            print(data_point.replace("\n", ""))
 
         outfile.close()
 
@@ -114,21 +115,23 @@ class Logger(object):
                 total_vaccinated += 1
             
         data = [
-            f"\nStep\t{time_step_number}",
-            f"New infections\t{number_of_new_infections}",
-            f"New deaths\t{number_of_new_fatalities}",
-            f"Interactions\t{number_of_interactions}",
-            f"Total Living\t{total_living}",
-            f"Total Dead\t{total_dead}",
-            f"Total Vaccinated\t{total_vaccinated}",
+            f"\n****** Step {time_step_number} ******\n",
+            f"New infections\t{number_of_new_infections}\n",
+            f"New deaths\t{number_of_new_fatalities}\n",
+            f"Interactions\t{number_of_interactions}\n",
+            f"Total Living\t{total_living}\n",
+            f"Total Dead\t{total_dead}\n",
+            f"Total Vaccinated\t{total_vaccinated}\n",
             f"Total Infected\t{total_infected}\n"
         ]
         
         outfile = open(self.file_name, "a")
         
+        print("")
         for data_point in data:
             outfile.write(data_point)
-            print(data_point)
+            print(data_point.replace("\n", ""))
+        print("")
 
         outfile.close()
         
